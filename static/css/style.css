@@ -1,0 +1,24 @@
+body {
+    background-color: #eeeeee;
+    color: #444444;
+}
+
+# select without scroll
+select {
+    height: 250px;
+    width: 100%;
+    padding:7px;
+    display:inline-block;
+    overflow:hidden;
+}
+
+tr .row_name {
+    font-weight: bold;
+    width: 160px;
+}
+tr .row_value {
+    width: 250px;
+}
+td.row_value input {
+    width: 100%;
+}

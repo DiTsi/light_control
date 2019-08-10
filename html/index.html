@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="jstorage.js"></script>
+		<title>Smart House - Light</title>
+  		<!-- <link rel="stylesheet" href="index.css"> -->
+  		<script type="text/javascript">
+			// $.jStorage.set('key', 'test');  
+			// value = $.jStorage.get('key');
+			// alert("test"+value);
+  		</script>
+  		<script type="text/javascript" src="jstorage.js">
+
+			// input.addEventListener('onchange', updateText, false);
+
+
+
+			// function saveSettings() {
+			// 	// localStorage.name = $('#name').val();   
+			// 	// localStorage.email = $('#email').val(); 
+			// 	// localStorage.telephone = $('#telephone').val(); 
+			// 	// localStorage.other = $('#other').val(); 
+			// 	// jQT.goBack();
+			// 	$.jStorage.set("notifications",$('#notifications').attr('checked'));
+			// 	$.jStorage.set("preview",$('#preview').attr('checked'));
+			// 	return false;
+			// }
+			// function loadSettings() {
+			// 	// $('#name').val(localStorage.name);
+			// 	// $('#email').val(localStorage.email);
+			// 	// $('#telephone').val(localStorage.telephone);
+			// 	// $('#other').val(localStorage.other);
+			// 	$.jStorage.get("notifications")?$('#notifications').attr('checked',$.jStorage.get("notifications")):false;
+			//     $.jStorage.get("preview")?$('#preview').attr('checked',$.jStorage.get("preview")):true;
+			// }
+			$(function() {
+				$('#notifications').val( $.jStorage.get("notifications") || "" );
+			});
+			$(function() {
+				$('#preview').val( $.jStorage.get("preview") || "" );
+			});
+			// $(function() {
+			// 	$('.milk').prop('checked', $.jsStorage.get('milk') === 'true');
+			// });
+		</script>
+		<script type="text/javascript" src="jstorage.js">
+  			function updateText() {
+  				$.jsStorage.set('milk', $('.milk').prop('checked'));
+  				// $.jStorage.set('milk', 'test');  
+  			}		
+		</script>
+	</head>
+	<body>
+		<div>
+			<!-- 
+			<table>
+			<form action="calc.php" method="get">
+				<tr>
+					<td>
+						<label class="switch">
+							<input type="checkbox" name="check_list[]" value="reee">
+							<span class="slider round"></span>
+						</label>
+					</td>
+					<td>
+						Коридор
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label class="switch">
+							<input type="checkbox" name="check_list[]" value="qwe">
+							<span class="slider round"></span>
+						</label>
+					</td>
+					<td>
+						Гостинная
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<label class="switch">
+							<input type="checkbox" name="check_list[]" value="room">
+							<span class="slider round"></span>
+						</label>
+					</td>
+					<td>
+						Комната, 1 эт.
+					</td>
+				</tr>
+			<?php include 'calc.php';?>
+			</form>
+			</table>
+			 -->
+ 		</div>
+ 		<div>
+			<!-- <input type="checkbox" class="milk" name="option1" value="Milk" onchange="updateText()"> -->
+			<form action="save-to-log.php" method="POST">
+			  <fieldset>
+			    <legend>Add to log</legend>
+			    <p>
+			      Message:
+			      <textarea name="message"></textarea>
+			    </p>
+			    <p>
+			      <input type="submit" value="SAVE" />
+			    </p>
+			  </fieldset>
+			</form>
+ 		</div>
+	</body>
+
+</html>
