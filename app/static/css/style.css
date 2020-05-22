@@ -1,6 +1,8 @@
 body {
+    zoom: 250%;
     background-color: #eeeeee;
     color: #444444;
+    font-family: sans-serif;
 }
 
 # select without scroll
@@ -21,4 +23,8 @@ tr .row_value {
 }
 td.row_value input {
     width: 100%;
+}
+input {
+    font-weight: bold;
+    font-family: sans-serif;
 }

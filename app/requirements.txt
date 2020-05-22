@@ -10,6 +10,5 @@ Jinja2==2.10.1
 MarkupSafe==1.1.1
 pyserial==3.4
 PyYAML==5.1.2
-serial==0.0.97
 Werkzeug==0.15.5
 WTForms==2.2.1
