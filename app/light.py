@@ -1,6 +1,5 @@
 import serial
 from time import sleep
-# from binascii import hexlify, unhexlify
 
 
 def light(data):
@@ -14,9 +13,7 @@ def light(data):
         rtscts=False,
         dsrdtr=False
     )
-
     if not ser.isOpen():
         ser.open()
-
     sleep(0.5)
-    ser.write(data)
+    ser.write(data.encode())

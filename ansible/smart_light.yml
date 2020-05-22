@@ -1,0 +1,42 @@
+---
+
+- hosts: backup
+  tasks:
+    - name: install pip2
+      package:
+        name: python2-pip
+      become: yes
+
+    - name: install docker
+      pip:
+        name: docker
+      become: yes
+
+    - name: copy new docker image for smart_light
+      copy:
+        src: ./smart_light_latest.dckr
+        dest: /root/
+      become: yes
+
+    - name: load docker image
+      shell: docker load -i /root/smart_light_latest.dckr
+      become: yes
+
+    - name: stop and remove old smart_light
+      docker_container:
+        name: smart_light
+        state: absent
+      become: yes
+      tags: debug
+
+    - name: start new smart_light
+      docker_container:
+        name: smart_light
+        image: smart_light:latest
+        auto_remove: yes
+        published_ports: 127.0.0.1:5001:5001
+        devices:
+          - "/dev/ttyUSB0"
+        state: started
+      become: yes
+      tags: debug

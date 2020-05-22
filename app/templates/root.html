@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Smart Light</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+    <!--<head>-->
+      <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">-->
+      <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+      <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>-->
+      <!--<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">-->
+      <!--<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>-->
+    <!--</head>-->
+  <body>
+    <!--<input type="checkbox" class='toggle' data-toggle="toggle" name="room"><div class='status' hidden="true">off</div>-->
+    <form action="/" method="get">
+      <!--<input type="submit" name="code" type="hidden" value="0">hell</input>-->
+    </form>
+
+    <form action="/" method="post">
+      <input type="submit" name="room" value="0">коридор, 1 эт.</input><br/>
+      <input type="submit" name="room" value="1">кухня</input><br/>
+      <input type="submit" name="room" value="2">комната, 1 эт.</input><br/>
+      <input type="submit" name="room" value="4">Дима</input><br/>
+      <input type="submit" name="room" value="5">коридор, 2 эт.</input><br/>
+      <input type="submit" name="room" value="7">ванная, 1 эт.</input><br/>
+    </form>
+    <hr>
+    <form action="/" method="post">
+      <input type="submit" name="all" value="2">DiTsi, ON</input><br/>
+      <input type="submit" name="all" value="1">ALL, ON</input><br/>
+      <input type="submit" name="all" value="0">ALL, OFF</input><br/>
+    </form>
+    <!--<input type="checkbox" class='toggle2' data-toggle="toggle" name="room2"><div class='status2' hidden="true">off2</div>-->
+    <!--<input type="checkbox" class='toggle' id="id3" data-toggle="toggle" name="room3"><div class='status3' hidden="true">off</div>-->
+    <!--<input type="checkbox" class='toggle' id="id4" data-toggle="toggle" name="room4"><div class='status4' hidden="true">off</div>-->
+    <!--<input type="checkbox" class='toggle' id="id5" data-toggle="toggle" name="room5"><div class='status5' hidden="true">off</div>-->
+    <!--<input type="checkbox" class='toggle' id="id6" data-toggle="toggle" name="room6"><div class='status6' hidden="true">off</div>-->
+  </body>
+<!--<script>-->
+ <!--$(document).ready(function() {-->
+  <!--$('.toggle').click(function() {-->
+   <!--var current_status = $('.status').text();-->
+   <!--$.ajax({-->
+    <!--url: "/get_toggled_status",-->
+    <!--type: "get",-->
+    <!--data: {status: current_status},-->
+    <!--success: function(response) {-->
+     <!--$(".status").html(response);-->
+    <!--}-->
+   <!--});-->
+  <!--});-->
+<!--});-->
+<!--</script>-->
+<!--<script>-->
+
+
+<!--</script>-->
+</html>
