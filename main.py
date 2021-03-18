@@ -8,45 +8,42 @@ application.config.update(dict(SECRET_KEY="\xaa\xa0\xcbH\xdf\xa0X!\x06u\x16\x014
 
 lights = [0, 0, 0, 0, 0, 0, 0, 0]
 lights_prev = [0, 0, 0, 0, 0, 0, 0, 0]
-
 roomsdict = {
-    # "corridor1": 
+    "corridor1": 7,
     # "corridor2": 
-    "kitchen": 1,
-    "bathroom1": 7,
-    "bathroom2": 5,
-    "katya:": 2,
-    "dmitry": 4,
-    "ditsi": 4
+    "kitchen": 6,
+    "bathroom1": 0,
+    "bathroom2": 2,
+    "katya": 5,
+    "dmitry": 3,
+    "ditsi": 3
     # "parents": 
     # "irina": 
     # "sergey": 
 }
-
-def toggle(saved, index):
-    tmp1 = int(saved, 2)^(int(str(10**index), 2))
-    tmp2 = bin(tmp1).replace('0b', '')
-    return tmp1, tmp2
 
 
 @application.route("/", methods=['GET'])
 def root():
     global lights
     global lights_prev
+    global roomsdict
 
     if request.method == 'GET':
         room = request.args.get('room')
         action = request.args.get('action') # on, off, toggle
         
+        room = room.split(",")
         lights = lights_prev
-        if action == 'on':
-            lights[roomsdict[room]] = 1
-        elif action == 'off':
-            lights[roomsdict[room]] = 0
-        elif action == 'toggle':
-            lights[roomsdict[room]] = lights[roomsdict[room]] ^ 1
-        else:
-            print('Incorrect action')
+        for r in room:
+            if action == 'on':
+                lights[roomsdict[r]] = 1
+            elif action == 'off':
+                lights[roomsdict[r]] = 0
+            elif action == 'toggle':
+                lights[roomsdict[r]] = lights[roomsdict[r]] ^ 1
+            else:
+                print('Incorrect action')
         light(lights)
         lights_prev = lights
 
