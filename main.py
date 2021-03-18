@@ -10,18 +10,28 @@ lights = [0, 0, 0, 0, 0, 0, 0, 0]
 lights_prev = [0, 0, 0, 0, 0, 0, 0, 0]
 roomsdict = {
     "corridor1": 7,
-    # "corridor2": 
     "kitchen": 6,
     "bathroom1": 0,
     "bathroom2": 2,
     "katya": 5,
     "dmitry": 3,
     "ditsi": 3
-    # "parents": 
-    # "irina": 
-    # "sergey": 
 }
 
+
+def set_state(roomname, action):
+    global lights
+    global roomsdict
+
+    if action == 'on':
+        lights[roomsdict[roomname]] = 1
+    elif action == 'off':
+        lights[roomsdict[roomname]] = 0
+    elif action == 'toggle':
+        lights[roomsdict[roomname]] = lights[roomsdict[roomname]] ^ 1
+    else:
+        print("Incorrect action: {}".format(action))
+    
 
 @application.route("/", methods=['GET'])
 def root():
@@ -30,20 +40,14 @@ def root():
     global roomsdict
 
     if request.method == 'GET':
-        room = request.args.get('room')
-        action = request.args.get('action') # on, off, toggle
-        
-        room = room.split(",")
-        lights = lights_prev
-        for r in room:
-            if action == 'on':
-                lights[roomsdict[r]] = 1
-            elif action == 'off':
-                lights[roomsdict[r]] = 0
-            elif action == 'toggle':
-                lights[roomsdict[r]] = lights[roomsdict[r]] ^ 1
-            else:
-                print('Incorrect action')
+        state = request.args.get('state').split(',')
+        for pos in state:
+            room, action = pos.split('~')
+            room_list = [room]
+            if room == 'all':
+                room_list = list(roomsdict.keys())
+            for r in room_list:
+                set_state(r, action)
         light(lights)
         lights_prev = lights
 
