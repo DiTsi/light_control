@@ -1,0 +1,28 @@
+- hosts: npi
+  become: yes
+  vars:
+    app_dir: /opt/light_control
+  tasks:
+    - name: create app dir
+      file:
+        path: "{{ app_dir }}"
+        state: directory
+    - name: template app files
+      template:
+        src: "{{ item }}"
+        dest: "{{ app_dir }}/"
+      with_items:
+        - ../light.py
+        - ../main.py
+        - ../requirements.txt
+    - name: template service
+      template:
+        src: "light_control.service"
+        dest: "/etc/systemd/system/"
+    - name: enable and restart
+      systemd:
+        name: light_control
+        state: restarted
+        daemon_reload: yes
+        enabled: yes
+      

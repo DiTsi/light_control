@@ -1,0 +1,12 @@
+[Unit]
+Description=Light Control
+
+[Service]
+Type=simple
+WorkingDirectory={{ app_dir }}
+ExecStart=/usr/bin/python3 {{ app_dir }}/main.py
+Restart=always
+RestartSec=20
+
+[Install]
+WantedBy=multi-user.target
