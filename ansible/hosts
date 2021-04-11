@@ -1,1 +1,0 @@
-npi ansible_host=10.52.100.104 ansible_user=pi ansible_python_interpreter=/usr/bin/python3
