@@ -3,18 +3,10 @@
   vars:
     app_dir: /opt/light_control
   tasks:
-    - name: create app dir
-      file:
-        path: "{{ app_dir }}"
-        state: directory
-    - name: template app files
-      template:
-        src: "{{ item }}"
-        dest: "{{ app_dir }}/"
-      with_items:
-        - ../light.py
-        - ../main.py
-        - ../requirements.txt
+    - name: get code
+      git:
+        dest: "{{ app_dir }}"
+        repo: "https://github.com/DiTsi-Smart-Home/light_control.git"
     - name: template service
       template:
         src: "light_control.service"
