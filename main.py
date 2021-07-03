@@ -1,6 +1,14 @@
 from flask import Flask, request
 from light import light_npi as light
+import logging
+from logging.handlers import TimedRotatingFileHandler
 
+
+path = 'logs/light.log'
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+handler = TimedRotatingFileHandler(path, when='midnight')
+logger.addHandler(handler)
 
 application = Flask(__name__)
 # you must generate this key with os.urandom(<number>) command
@@ -30,7 +38,7 @@ def set_state(roomname, action):
     elif action == 'toggle':
         lights[roomsdict[roomname]] = lights[roomsdict[roomname]] ^ 1
     else:
-        print("Incorrect action: {}".format(action))
+        logger.info('Incorrect action: {}'.format(action))
     
 
 @application.route("/", methods=['GET'])
@@ -40,15 +48,20 @@ def root():
     global roomsdict
 
     if request.method == 'GET':
-        state = request.args.get('state').split(',')
+        newState = request.args.get('state')
+        logger.info('New state: {}'.format(newState))
+
+        state = newState.split(',')
         for pos in state:
             room, action = pos.split('~')
-            room_list = [room]
             if room == 'all':
                 room_list = list(roomsdict.keys())
+            else:
+                room_list = [room]
             for r in room_list:
                 set_state(r, action)
         light(lights)
+        logger.info('Lights : {}'.format(lights))
         lights_prev = lights
 
     return 'ok'

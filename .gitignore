@@ -2,3 +2,7 @@ venv
 env
 __pycache__
 .vscode
+<<<<<<< HEAD
+=======
+*.dckr
+>>>>>>> 24467e3e337a23a89ee2a5fc9f68f4c9e1690f68
