@@ -43,7 +43,9 @@ def state(pin, state):
 def light_npi(data):
     for pin in range(len(data)):
         if data[pin]:
-            state(pinout[pin], data[pin])
+            state(pinout[pin], True)
+        else:
+            state(pinout[pin], False)
 
 def set_state(roomname, action):
     global lights
