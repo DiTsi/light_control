@@ -10,56 +10,40 @@ logger.setLevel(logging.INFO)
 handler = TimedRotatingFileHandler(path, when='midnight')
 logger.addHandler(handler)
 
+
+class Room:
+    def __init__(self, name, pinout):
+        self.name = name
+        self.pinout = pinout
+        self.state = False
+        GPIO.setup(self.pinout, GPIO.OUT)
+
+    def state(self, state):
+        GPIO.output(self.pinout, state)
+        self.state = state
+
+    def toggle(self):
+        if self.state:
+            self.state(False)
+        else:
+            self.state(True)
+
+
 application = Flask(__name__)
 # you must generate this key with os.urandom(<number>) command
 application.config.update(dict(SECRET_KEY="\xaa\xa0\xcbH\xdf\xa0X!\x06u\x16\x014\x12\x87\x1cu7\x833\x83\xd1e\xbb\x00\xf4\x07\x98\xc4Z\x16)\x06{sbx\xc2\xe6\xdc\xda\xb6"))
 
-lights = [0, 0, 0, 0, 0, 0, 0, 0]
-lights_prev = [0, 0, 0, 0, 0, 0, 0, 0]
-roomsdict = {
-    "bathroom1": 0,
-    "bathroom2": 2,
-    "dmitry": 3,
-    "ditsi": 3,
-    "room": 4,
-    "katya": 5,
-    "kitchen": 6,
-    "corridor1": 7
+rooms = {
+    "bathroom1": 3,
+    "bathroom2": 5,
+    "ditsi": 7,
+    # "parents":
+    "room": 10,
+    "katya": 11,
+    "kitchen": 12,
+    "corridor1": 13
+    # "corridor2":
 }
-pinout = {
-    0: 13,
-    1: 12,
-    2: 11,
-    3: 10,
-    4: 8,
-    5: 7,
-    6: 5,
-    7: 3
-}
-
-def state(pin, state):
-    GPIO.output(pin, state)
-
-def light_npi(data):
-    for pin in range(len(data)):
-        if data[pin]:
-            state(pinout[pin], True)
-        else:
-            state(pinout[pin], False)
-
-def set_state(roomname, action):
-    global lights
-    global roomsdict
-
-    if action == 'on':
-        lights[roomsdict[roomname]] = 1
-    elif action == 'off':
-        lights[roomsdict[roomname]] = 0
-    elif action == 'toggle':
-        lights[roomsdict[roomname]] = lights[roomsdict[roomname]] ^ 1
-    else:
-        logger.info('Incorrect action: {}'.format(action))
-    
 
 @application.route("/", methods=['GET'])
 def root():
@@ -78,18 +62,20 @@ def root():
                 room_list = list(roomsdict.keys())
             else:
                 room_list = [room]
-            for r in room_list:
-                set_state(r, action)
-        light_npi(lights)
-        logger.info('Lights : {}'.format(lights))
-        lights_prev = lights
 
+        for r in room_list:
+            if action == 'toggle':
+                rooms[r].toggle()
+            else:
+                s = True if action == 'on' else False
+                rooms[r].state(s)
+            # logger.info('Lights : {}'.format(lights))
     return 'ok'
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":    
     GPIO.setmode(GPIO.BOARD)
-    for pin in pinout.values():
-        GPIO.setup(pin, GPIO.OUT)
+    for roomname in rooms.keys():
+        rooms[roomname] = Room(rooname, rooms[roomname])
 
     application.run('0.0.0.0', 5002, debug=True)
