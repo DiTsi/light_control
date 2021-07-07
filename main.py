@@ -38,7 +38,7 @@ rooms = {
     "room1": 3, #4 outOfBox
     "katya": 5, #3 outOfBox
     "kitchen": 7, #2 outOfBox
-    "corridor1": 8 #1 outOfBox
+    "corridor1": 8, #1 outOfBox
     "ditsi": 10, #5 outOfBox
     "bathroom2": 11, #6 outOfBox
     # "kitchen": 12, #7 outOfBox
