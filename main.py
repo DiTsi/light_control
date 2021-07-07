@@ -44,6 +44,7 @@ rooms = {
     "corridor1": 13
     # "corridor2":
 }
+roomsdict = {}
 
 @application.route("/", methods=['GET'])
 def root():
