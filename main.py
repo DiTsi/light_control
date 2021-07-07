@@ -16,17 +16,18 @@ class Room:
         self.name = name
         self.pinout = pinout
         self.state = False
-        GPIO.setup(self.pinout, GPIO.OUT)
+        self.setState(self.state)
 
-    def state(self, state):
+    def setState(self, state):
+        GPIO.setup(self.pinout, GPIO.OUT)
         GPIO.output(self.pinout, state)
         self.state = state
 
     def toggle(self):
         if self.state:
-            self.state(False)
+            self.setState(False)
         else:
-            self.state(True)
+            self.setState(True)
 
 
 application = Flask(__name__)
@@ -58,18 +59,18 @@ def root():
 
         state = newState.split(',')
         for p in state:
-            room, action = p.split('~')
-            if room == 'all':
+            rooms, action = p.split('~')
+            if rooms == 'all':
                 room_list = list(roomsdict.keys())
             else:
-                room_list = [room]
+                room_list = [rooms]
 
             for r in room_list:
                 if action == 'toggle':
                     roomsdict[r].toggle()
                 else:
                     s = True if action == 'on' else False
-                    roomsdict[r].state(s)
+                    roomsdict[r].setState(s)
                 # logger.info('Lights : {}'.format(lights))
     return 'ok'
 
