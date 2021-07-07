@@ -2,7 +2,7 @@ from flask import Flask, request
 import logging
 from logging.handlers import TimedRotatingFileHandler
 import RPi.GPIO as GPIO
-from time import sleep
+
 
 path = 'logs/light.log'
 logger = logging.getLogger()
