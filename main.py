@@ -57,20 +57,20 @@ def root():
         logger.info('New state: {}'.format(newState))
 
         state = newState.split(',')
-        for pos in state:
-            room, action = pos.split('~')
+        for p in state:
+            room, action = p.split('~')
             if room == 'all':
                 room_list = list(roomsdict.keys())
             else:
                 room_list = [room]
 
-        for r in room_list:
-            if action == 'toggle':
-                roomsdict[r].toggle()
-            else:
-                s = True if action == 'on' else False
-                roomsdict[r].state(s)
-            # logger.info('Lights : {}'.format(lights))
+            for r in room_list:
+                if action == 'toggle':
+                    roomsdict[r].toggle()
+                else:
+                    s = True if action == 'on' else False
+                    roomsdict[r].state(s)
+                # logger.info('Lights : {}'.format(lights))
     return 'ok'
 
 
