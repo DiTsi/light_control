@@ -35,14 +35,14 @@ application = Flask(__name__)
 application.config.update(dict(SECRET_KEY="\xaa\xa0\xcbH\xdf\xa0X!\x06u\x16\x014\x12\x87\x1cu7\x833\x83\xd1e\xbb\x00\xf4\x07\x98\xc4Z\x16)\x06{sbx\xc2\xe6\xdc\xda\xb6"))
 
 rooms = {
-    "room1": 3, #4 outOfBox
-    "katya": 5, #3 outOfBox
-    "kitchen": 7, #2 outOfBox
-    "corridor1": 8, #1 outOfBox
-    "ditsi": 10, #5 outOfBox
-    "bathroom2": 11, #6 outOfBox
-    # "kitchen": 12, #7 outOfBox
-    "bathroom1": 13 #8 outOfBox
+    "room1": 3,         #4 outOfBox
+    "katya": 5,         #3 outOfBox
+    "kitchen": 7,       #2 outOfBox
+    "corridor1": 8,     #1 outOfBox
+    "ditsi": 13,        #5 outOfBox
+    "bathroom2": 12,    #6 outOfBox
+    # "": 11,           #7 outOfBox
+    "bathroom1": 10     #8 outOfBox
 }
 roomsdict = {}
 
