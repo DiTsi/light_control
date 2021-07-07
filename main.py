@@ -41,7 +41,7 @@ rooms = {
     "corridor1": 8,     #1 outOfBox
     "ditsi": 13,        #5 outOfBox
     "bathroom2": 12,    #6 outOfBox
-    # "": 11,           #7 outOfBox
+    "NONE": 11,         #7 outOfBox
     "bathroom1": 10     #8 outOfBox
 }
 roomsdict = {}
