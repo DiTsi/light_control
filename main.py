@@ -65,10 +65,10 @@ def root():
 
         for r in room_list:
             if action == 'toggle':
-                rooms[r].toggle()
+                roomsdict[r].toggle()
             else:
                 s = True if action == 'on' else False
-                rooms[r].state(s)
+                roomsdict[r].state(s)
             # logger.info('Lights : {}'.format(lights))
     return 'ok'
 
@@ -76,6 +76,6 @@ def root():
 if __name__ == "__main__":    
     GPIO.setmode(GPIO.BOARD)
     for roomname in rooms.keys():
-        rooms[roomname] = Room(rooname, rooms[roomname])
+        roomsdict[roomname] = Room(roomname, rooms[roomname])
 
     application.run('0.0.0.0', 5002, debug=True)
