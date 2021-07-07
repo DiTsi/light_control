@@ -3,14 +3,19 @@ from time import sleep
 
 
 def low(pin):
-    GPIO.output(pin,False)
-    sleep(0.001)
+    GPIO.output(pin, False)
 
 def high(pin):
-    GPIO.output(pin,True)
-    sleep(0.001)
+    GPIO.output(pin, True)
+
+def state(pin, state):
+    GPIO.output(pin, state)
 
 def light_npi(data):
+
+
+
+
     STCP = 3
     SHCP = 5
     DS = 7
@@ -31,3 +36,4 @@ def light_npi(data):
         low(DS)
     high(STCP)
     low(STCP)
+

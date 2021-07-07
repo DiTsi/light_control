@@ -1,8 +1,8 @@
 from flask import Flask, request
-from light import light_npi as light
 import logging
 from logging.handlers import TimedRotatingFileHandler
-
+import RPi.GPIO as GPIO
+from time import sleep
 
 path = 'logs/light.log'
 logger = logging.getLogger()
@@ -17,15 +17,33 @@ application.config.update(dict(SECRET_KEY="\xaa\xa0\xcbH\xdf\xa0X!\x06u\x16\x014
 lights = [0, 0, 0, 0, 0, 0, 0, 0]
 lights_prev = [0, 0, 0, 0, 0, 0, 0, 0]
 roomsdict = {
-    "corridor1": 7,
-    "kitchen": 6,
     "bathroom1": 0,
     "bathroom2": 2,
-    "katya": 5,
     "dmitry": 3,
-    "ditsi": 3
+    "ditsi": 3,
+    "room": 4,
+    "katya": 5,
+    "kitchen": 6,
+    "corridor1": 7
+}
+pinout = {
+    0: 3,
+    1: 5,
+    2: 7,
+    3: 8,
+    4: 10,
+    5: 11,
+    6: 12,
+    7: 13
 }
 
+def state(pin, state):
+    GPIO.output(pin, state)
+
+def light_npi(data):
+    for pin in range(len(data)):
+        if data[pin]:
+            state(pinout[pin], data[pin])
 
 def set_state(roomname, action):
     global lights
@@ -60,7 +78,7 @@ def root():
                 room_list = [room]
             for r in room_list:
                 set_state(r, action)
-        light(lights)
+        light_npi(lights)
         logger.info('Lights : {}'.format(lights))
         lights_prev = lights
 
@@ -68,4 +86,8 @@ def root():
 
 
 if __name__ == "__main__":
+    GPIO.setmode(GPIO.BOARD)
+    for pin in pinout.values():
+        GPIO.setup(pin, GPIO.OUT)
+
     application.run('0.0.0.0', 5002, debug=True)
